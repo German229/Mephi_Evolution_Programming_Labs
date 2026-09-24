@@ -1,0 +1,23 @@
+# Контроль к варианту D: A с бинарным турниром (k = 2, как в NSGA-II) — отделяет влияние давления отбора от Парето-отбора
+tag = "gp_depth_k2"
+bloat_control = "depth"      # depth | parsimony | tarpeian | nsga2
+problems = ["pagie1"]
+seed = 4000                  # запуск i использует seed + i
+runs = 30
+
+[gp]
+functions = ["add", "sub", "mul", "div", "sin", "cos", "exp", "log"]
+p_const = 0.3                # доля констант среди терминалов
+pop_size = 200
+budget = 20000               # критерий остановки: лимит вычислений ФФ
+init_min_depth = 2
+init_max_depth = 6
+max_depth = 17
+max_size = 500
+tournament_k = 2
+elite = 2
+p_crossover = 0.9
+p_subtree_mutation = 0.05    # остаток 0.05 — точечная мутация
+parsimony_c = 0.0
+tarpeian_p = 0.0
+log_every = 2

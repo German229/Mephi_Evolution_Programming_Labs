@@ -57,6 +57,9 @@ def convergence(x, M, title, path, xlabel="поколение", ylabel="лучш
                 fmt="{:.1e}", ref=None):
     fig, ax = _new()
     band_plot(ax, x, M, SERIES[0], "серия", minmax=True, log=log, fmt=fmt)
+    with np.errstate(all="ignore"):
+        mean = np.nanmean(np.maximum(M, FLOOR) if log else M, axis=0)
+    ax.plot(x, mean, color=INK_2, linewidth=1.5, linestyle="--", label="серия: среднее")
     _reference(ax, ref)
     _style(ax, xlabel, ylabel, log=log)
     ax.legend(frameon=False, fontsize=9, labelcolor=INK)

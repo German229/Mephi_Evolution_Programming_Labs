@@ -1,0 +1,29 @@
+# Контроль: лучший фиксированный шаг из развёртки (σ = 0.001·ширины), отличие от ga_base только sigma_frac
+tag = "ga_sigma_small"
+algorithm = "ga"
+seed = 1000          # запуск i использует seed + i
+runs = 20
+
+[problem]
+name = "griewank"
+dim = 10
+lower = -600.0
+upper = 600.0
+
+[ga]
+pop_size = 100
+budget = 50000       # критерий остановки: лимит вычислений ФФ
+elite = 2
+selection = "tournament"
+tournament_k = 3
+rank_s = 1.5
+crossover = "blx"
+blx_alpha = 0.5
+p_crossover = 0.9
+p_mutation = 0.1     # на ген, = 1/d
+sigma_frac = 0.001   # σ = 0.001 · (upper − lower) = 1.2
+adaptive = false
+tau = 0.316          # 1/sqrt(d), используется только при adaptive = true
+sigma_min_frac = 1e-9
+sigma_frac_max = 0.5
+log_every = 5        # шаг записи агрегатов по поколениям

@@ -12,11 +12,11 @@ from evo_core import plotting
 from evo_core.stats import describe, mann_whitney, read_csv
 
 RESULTS = Path(__file__).parent / "results"
-ORDER = ["ga_base", "ga_sigma_large", "ga_adaptive", "ga_adaptive_pm03", "random_search"]
-LABELS = {"ga_base": "ГА, σ=0.01", "ga_sigma_large": "ГА, σ=0.1", "ga_adaptive": "ГА, адапт. σ",
+ORDER = ["ga_base", "ga_sigma_large", "ga_sigma_small", "ga_adaptive", "ga_adaptive_pm03", "random_search"]
+LABELS = {"ga_base": "ГА, σ=0.01", "ga_sigma_large": "ГА, σ=0.1", "ga_sigma_small": "ГА, σ=0.001", "ga_adaptive": "ГА, адапт. σ",
           "ga_adaptive_pm03": "ГА, адапт. σ, p_m=0.3", "random_search": "случайный поиск"}
 TESTS = [("ga_base", "random_search"), ("ga_base", "ga_sigma_large"),
-         ("ga_adaptive", "ga_base"), ("ga_adaptive_pm03", "ga_base")]
+         ("ga_adaptive", "ga_base"), ("ga_adaptive", "ga_sigma_small"), ("ga_adaptive_pm03", "ga_adaptive")]
 HIT = 1e-8  # порог «достигнут глобальный минимум»
 
 

@@ -83,6 +83,24 @@ def tests(problem):
     return out
 
 
+def control():
+    """Контроль к D на Pagie-1: A с бинарным турниром (k = 2) разделяет влияние давления отбора и Парето-отбора."""
+    if not (RESULTS / "pagie1_gp_depth_k2_summary.csv").exists():
+        return []
+    a, k2, d = (summary("pagie1", v) for v in ("gp_depth", "gp_depth_k2", "gp_nsga2"))
+    out = ["## Контроль: чем объясняется провал D на Pagie-1", "",
+           "A с бинарным турниром (k = 2, как у D) отличается от A только давлением отбора, "
+           "а от D — отсутствием Парето-отбора по размеру.", "",
+           "| сравнение | медиана test 1 | медиана test 2 | размер 1 / 2 | z | p | Â12 (первый лучше) |",
+           "|---|---|---|---|---|---|---|"]
+    for n1, x, n2, y in (("A (k=7)", a, "A (k=2)", k2), ("A (k=2)", k2, "D (k=2 + Парето)", d)):
+        _, z, pv = mann_whitney(x["test"], y["test"])
+        out.append(f"| {n1} vs {n2} | {np.median(x['test']):.4f} | {np.median(y['test']):.4f} | "
+                   f"{np.median(x['size']):.0f} / {np.median(y['size']):.0f} | {z:.2f} | {pv:.2e} | "
+                   f"{vargha_delaney_a12(y['test'], x['test']):.2f} |")
+    return out + [""]
+
+
 def median_run(problem, v):
     s = summary(problem, v)
     k = int(np.argsort(s["test"])[len(s["test"]) // 2])
@@ -219,6 +237,7 @@ def main():
            "z < 0 — у варианта значения меньше (лучше). Â12 > 0.5 — вариант лучше A; 0.56/0.64/0.71 — малый/средний/большой эффект.", ""]
     for pr in PROBLEMS:
         md += tests(pr) + [""]
+    md += control()
     md += ["## Формулы", ""]
     for pr in PROBLEMS:
         md += formulas(pr) + [""]

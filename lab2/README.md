@@ -4,7 +4,13 @@
 бюджет Σc ≤ B, потребляемая мощность Σw ≤ P, несовместимые пары приборов, зависимости «A требует B».
 Экземпляр: `data/instance.json` (40 приборов, 8 зависимостей, 12 несовместимостей; числа сгенерированы с seed 2026).
 
-## Запуск (из корня репозитория; установка — см. `lab1/README.md`)
+## Установка
+```bash
+python3 -m venv .venv                          # Python >= 3.11
+.venv/bin/pip install -r requirements.txt      # numpy, matplotlib, pytest
+```
+
+## Запуск (из корня репозитория)
 ```bash
 # экземпляр данных (уже лежит в data/, пересоздаётся тем же seed)
 .venv/bin/python -m lab2.generate_data --seed 2026

@@ -20,7 +20,7 @@ LABELS = {"nsga2": "NSGA-II, η_m=20", "nsga2_eta5": "NSGA-II, η_m=5", "weighte
           "weighted_sum_10x": "взвеш. свёртка, 10× бюджет", "random_search": "случайный поиск"}
 TESTS = [("nsga2", "weighted_sum"), ("nsga2", "weighted_sum_10x"), ("nsga2", "random_search"),
          ("nsga2_eta5", "nsga2")]
-DEFICIT_TOL = 0.05  # «экономный» режим: дефицит не более 5 % от дефицита без полива
+DEFICIT_TOL = 0.05  # режим «малый стресс»: дефицит не более 5 % от дефицита без полива
 
 
 def summary(tag):
@@ -50,9 +50,10 @@ def characteristic(F, nadir):
     span = np.maximum(Fn.max(0) - ideal, 1e-12)
     ok = np.flatnonzero(F[:, 1] <= DEFICIT_TOL * nadir[1])
     return {
-        "без стресса": int(np.lexsort((F[:, 0], F[:, 1]))[0]),                  # min дефицит, затем min вода
+        "минимум воды": int(np.lexsort((F[:, 1], F[:, 0]))[0]),                 # самое дешёвое решение фронта
         "сбалансированный (колено)": int(np.argmin(np.linalg.norm((Fn - ideal) / span, axis=1))),
-        "экономный": int(ok[np.argmin(F[ok, 0])]),                                # min вода при малом дефиците
+        "малый стресс": int(ok[np.argmin(F[ok, 0])]),                            # min вода при дефиците ≤ 5 %
+        "без стресса": int(np.lexsort((F[:, 0], F[:, 1]))[0]),                  # min дефицит, затем min вода
     }
 
 
@@ -103,11 +104,12 @@ def plot_projections(model, nadir, idx, path):
         for name, i in idx.items():
             ax.scatter(F[i, a], F[i, b], s=90, facecolors="none", edgecolors=INK, linewidths=1.5, zorder=5)
             ax.annotate(name.replace(" (колено)", ""), (F[i, a], F[i, b]), xytext=(6, 4), textcoords="offset points",
-                        fontsize=8, color=INK)
+                        fontsize=8, color=INK, annotation_clip=False, zorder=10,
+                        bbox={"boxstyle": "round,pad=0.15", "fc": SURFACE, "ec": "none", "alpha": 0.85})
         ax.set_xscale("symlog", linthresh=10)
         ax.set_yscale("symlog", linthresh=10)
         plotting._style(ax, OBJECTIVES[a], OBJECTIVES[b], log=False)
-    axes[0].legend(frameon=False, fontsize=8, labelcolor=INK, loc="upper right")
+    axes[0].legend(frameon=False, fontsize=8, labelcolor=INK, loc="lower left")
     axes[0].set_title("Проекции фронта Парето (симлог-оси)", loc="left", color=INK, fontsize=12)
     fig.tight_layout()
     fig.savefig(path, dpi=110, facecolor=SURFACE)
@@ -115,8 +117,8 @@ def plot_projections(model, nadir, idx, path):
 
 
 def plot_schedules(model, F, X, idx, path):
-    names = ["без стресса", "сбалансированный (колено)", "экономный"]
-    fig, axes = plt.subplots(2, 3, figsize=(14, 6), facecolor=SURFACE, sharex=True,
+    names = list(idx)
+    fig, axes = plt.subplots(2, len(names), figsize=(4.6 * len(names), 6), facecolor=SURFACE, sharex=True,
                              gridspec_kw={"height_ratios": [3, 2]})
     days = np.arange(1, model.days + 1)
     for col, name in enumerate(names):
@@ -139,7 +141,7 @@ def plot_schedules(model, F, X, idx, path):
     axes[0, 0].annotate("зона стресса θ < θ_low", (1, 4), color=INK_2, fontsize=8)
     axes[0, 0].annotate("переувлажнение θ > FC", (1, model.fc + 4), color=INK_2, fontsize=8)
     axes[1, 0].legend(frameon=False, fontsize=8, labelcolor=INK)
-    axes[0, 2].legend(frameon=False, fontsize=8, labelcolor=INK, loc="upper right")
+    axes[0, -1].legend(frameon=False, fontsize=8, labelcolor=INK, loc="upper right")
     fig.tight_layout()
     fig.savefig(path, dpi=110, facecolor=SURFACE)
     plt.close(fig)

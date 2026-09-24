@@ -9,8 +9,15 @@
 | B | `gp_parsimony.toml` | фитнес NRMSE + c·size, c = 1e-3 |
 | C | `gp_tarpeian.toml` | тарпейский метод, p = 0.6 |
 | D | `gp_nsga2.toml` | NSGA-II по (NRMSE, size) из `evo_core/moo.py` |
+| контроль | `gp_depth_k2.toml` | A с бинарным турниром (k = 2), только Pagie-1: отделяет влияние давления отбора от Парето-отбора в D |
 
-## Запуск (из корня репозитория; установка — см. `lab1/README.md`)
+## Установка
+```bash
+python3 -m venv .venv                          # Python >= 3.11
+.venv/bin/pip install -r requirements.txt      # numpy, matplotlib, pytest
+```
+
+## Запуск (из корня репозитория)
 ```bash
 # данные (уже лежат в data/, пересоздаются тем же seed)
 .venv/bin/python -m lab4.data --seed 2026
@@ -20,6 +27,9 @@
 
 # полный набор: 4 варианта × 2 задачи × 30 запусков, ~10 мин на слабой машине
 .venv/bin/python -m lab4.main --config lab4/configs/gp_depth.toml lab4/configs/gp_parsimony.toml lab4/configs/gp_tarpeian.toml lab4/configs/gp_nsga2.toml
+
+# контрольная серия к варианту D (Pagie-1, ~2 мин)
+.venv/bin/python -m lab4.main --config lab4/configs/gp_depth_k2.toml
 
 # одна серия со своим seed
 .venv/bin/python -m lab4.main --config lab4/configs/gp_nsga2.toml --seed 42 --runs 30

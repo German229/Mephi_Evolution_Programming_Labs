@@ -13,7 +13,7 @@ $f(x) = 1 + \frac{1}{4000}\sum x_i^2 - \prod \cos(x_i/\sqrt{i})$, $x_i \in [-600
 # одна серия (20 запусков, seed 1000..1019), ~1 с
 .venv/bin/python -m lab1.main --config lab1/configs/ga_base.toml
 
-# все эксперименты ЛР1, ~5 с
+# все эксперименты ЛР1 (6 конфигураций), ~6 с
 .venv/bin/python -m lab1.main --config lab1/configs/*.toml
 
 # свой seed / число запусков
@@ -34,6 +34,7 @@ $f(x) = 1 + \frac{1}{4000}\sum x_i^2 - \prod \cos(x_i/\sqrt{i})$, $x_i \in [-600
 |---|---|---|
 | `ga_base.toml` | базовый ГА | — |
 | `ga_sigma_large.toml` | эксперимент 3 (один фактор) | `sigma_frac = 0.1` |
+| `ga_sigma_small.toml` | контроль: лучший фиксированный шаг из развёртки | `sigma_frac = 0.001` |
 | `random_search.toml` | эксперимент 4 | `algorithm = "random"` |
 | `ga_adaptive.toml` | доп. задание | `adaptive = true` |
 | `ga_adaptive_pm03.toml` | доп. задание, настроенный | `adaptive = true`, `p_mutation = 0.3` |

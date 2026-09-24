@@ -1,0 +1,36 @@
+{
+  "tag": "gp_depth_k2",
+  "bloat_control": "depth",
+  "problems": [
+    "pagie1"
+  ],
+  "seed": 4000,
+  "runs": 30,
+  "gp": {
+    "functions": [
+      "add",
+      "sub",
+      "mul",
+      "div",
+      "sin",
+      "cos",
+      "exp",
+      "log"
+    ],
+    "p_const": 0.3,
+    "pop_size": 200,
+    "budget": 20000,
+    "init_min_depth": 2,
+    "init_max_depth": 6,
+    "max_depth": 17,
+    "max_size": 500,
+    "tournament_k": 2,
+    "elite": 2,
+    "p_crossover": 0.9,
+    "p_subtree_mutation": 0.05,
+    "parsimony_c": 0.0,
+    "tarpeian_p": 0.0,
+    "log_every": 2
+  },
+  "problem": "pagie1"
+}
