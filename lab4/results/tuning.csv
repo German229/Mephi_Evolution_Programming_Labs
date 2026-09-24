@@ -1,0 +1,13 @@
+mode,param,value,problem,val_nrmse_median,size_median
+parsimony,parsimony_c,0.0003,nguyen7,0.0483546,9
+parsimony,parsimony_c,0.0003,pagie1,0.146926,82
+parsimony,parsimony_c,0.001,nguyen7,0.0517402,4
+parsimony,parsimony_c,0.001,pagie1,0.117545,72
+parsimony,parsimony_c,0.003,nguyen7,0.0631174,4
+parsimony,parsimony_c,0.003,pagie1,0.195641,18
+tarpeian,tarpeian_p,0.3,nguyen7,0.0476893,65
+tarpeian,tarpeian_p,0.3,pagie1,0.130425,114
+tarpeian,tarpeian_p,0.6,nguyen7,0.048947,7
+tarpeian,tarpeian_p,0.6,pagie1,0.132102,39
+tarpeian,tarpeian_p,0.9,nguyen7,0.054843,21
+tarpeian,tarpeian_p,0.9,pagie1,0.407042,13

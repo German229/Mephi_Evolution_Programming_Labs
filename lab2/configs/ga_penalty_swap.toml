@@ -1,0 +1,21 @@
+# Сравнение операторов при штрафе: отличие от ga_penalty только в мутации (обмен «взять — убрать», 1 на особь)
+tag = "ga_penalty_swap"
+algorithm = "ga"
+instance = "lab2/data/instance.json"
+seed = 2000          # запуск i использует seed + i
+runs = 20
+
+[ga]
+pop_size = 100
+budget = 20000       # критерий остановки: лимит вычислений ФФ
+elite = 2
+tournament_k = 3
+p_init = 0.25        # вероятность единицы при инициализации
+crossover = "uniform"
+p_crossover = 0.9
+mutation = "swap"
+p_mutation = 1.0    # swap: вероятность обмена на особь
+constraints = "penalty"
+repair_fill = true
+penalty_lambda = 300.0  # штраф за единицу нарушения
+log_every = 2

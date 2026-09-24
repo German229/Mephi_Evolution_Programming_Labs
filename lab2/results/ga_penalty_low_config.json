@@ -1,0 +1,22 @@
+{
+  "tag": "ga_penalty_low",
+  "algorithm": "ga",
+  "instance": "lab2/data/instance.json",
+  "seed": 2000,
+  "runs": 20,
+  "ga": {
+    "pop_size": 100,
+    "budget": 20000,
+    "elite": 2,
+    "tournament_k": 3,
+    "p_init": 0.25,
+    "crossover": "uniform",
+    "p_crossover": 0.9,
+    "mutation": "bitflip",
+    "p_mutation": 0.025,
+    "constraints": "penalty",
+    "repair_fill": true,
+    "penalty_lambda": 50.0,
+    "log_every": 2
+  }
+}

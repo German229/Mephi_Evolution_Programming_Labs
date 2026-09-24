@@ -1,0 +1,31 @@
+# Взвешенная свёртка с 10-кратным бюджетом (20 000 на каждый вектор весов) — верхняя оценка метода
+tag = "weighted_sum_10x"
+algorithm = "weighted_sum"
+weather = "lab3/data/weather.json"
+seed = 3000          # запуск i использует seed + i
+runs = 20
+
+[model]              # параметры модели водного баланса (см. model.py)
+fc = 100.0
+theta_sat = 130.0
+theta_low = 50.0
+theta0 = 60.0
+kc = 1.0
+efficiency = 0.9
+drain = 0.5
+i_max = 25.0
+
+[moea]
+pop_size = 100
+budget = 200000      # в 10 раз больше, чем у NSGA-II
+p_crossover = 0.9
+eta_c = 15.0         # SBX
+p_mutation = 0.0     # 0 -> 1/d
+eta_m = 20.0         # полиномиальная мутация
+hv_ref = 1.1         # опорная точка гиперобъёма в нормированных координатах f/nadir
+log_every = 2
+# только для взвешенной свёртки
+ws_h = 3             # решётка весов: C(h+2,2) = 10 векторов
+ws_pop_size = 40
+elite = 2
+tournament_k = 2

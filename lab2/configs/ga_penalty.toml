@@ -1,0 +1,21 @@
+# Сравнение способов учёта ограничений: штраф вместо ремонта (λ = 300)
+tag = "ga_penalty"
+algorithm = "ga"
+instance = "lab2/data/instance.json"
+seed = 2000          # запуск i использует seed + i
+runs = 20
+
+[ga]
+pop_size = 100
+budget = 20000       # критерий остановки: лимит вычислений ФФ
+elite = 2
+tournament_k = 3
+p_init = 0.25        # вероятность единицы при инициализации
+crossover = "uniform"
+p_crossover = 0.9
+mutation = "bitflip"
+p_mutation = 0.025   # bitflip: на ген, = 1/n; swap: на особь
+constraints = "penalty"
+repair_fill = true
+penalty_lambda = 300.0  # штраф за единицу нарушения
+log_every = 2

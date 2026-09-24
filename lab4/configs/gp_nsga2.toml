@@ -1,0 +1,23 @@
+# D. Двухкритериальное ГП: NSGA-II по (NRMSE, size), отбор турниром по рангу и скученности (tournament_k, elite не используются)
+tag = "gp_nsga2"
+bloat_control = "nsga2"
+problems = ["nguyen7", "pagie1"]
+seed = 4000                  # запуск i использует seed + i
+runs = 30
+
+[gp]
+functions = ["add", "sub", "mul", "div", "sin", "cos", "exp", "log"]
+p_const = 0.3                # доля констант среди терминалов
+pop_size = 200
+budget = 20000               # критерий остановки: лимит вычислений ФФ
+init_min_depth = 2
+init_max_depth = 6
+max_depth = 17
+max_size = 500
+tournament_k = 7
+elite = 2
+p_crossover = 0.9
+p_subtree_mutation = 0.05    # остаток 0.05 — точечная мутация
+parsimony_c = 0.0
+tarpeian_p = 0.0
+log_every = 2

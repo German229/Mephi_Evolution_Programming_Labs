@@ -1,0 +1,30 @@
+{
+  "tag": "ga_sigma_large",
+  "algorithm": "ga",
+  "seed": 1000,
+  "runs": 20,
+  "problem": {
+    "name": "griewank",
+    "dim": 10,
+    "lower": -600.0,
+    "upper": 600.0
+  },
+  "ga": {
+    "pop_size": 100,
+    "budget": 50000,
+    "elite": 2,
+    "selection": "tournament",
+    "tournament_k": 3,
+    "rank_s": 1.5,
+    "crossover": "blx",
+    "blx_alpha": 0.5,
+    "p_crossover": 0.9,
+    "p_mutation": 0.1,
+    "sigma_frac": 0.1,
+    "adaptive": false,
+    "tau": 0.316,
+    "sigma_min_frac": 1e-09,
+    "sigma_frac_max": 0.5,
+    "log_every": 5
+  }
+}

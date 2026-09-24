@@ -1,0 +1,8 @@
+nguyen7_gp_depth       runs=30 test NRMSE med=0.0486 size med=118 t=111s
+pagie1_gp_depth        runs=30 test NRMSE med=0.1699 size med=152 t=166s
+nguyen7_gp_parsimony   runs=30 test NRMSE med=0.0475 size med=6 t=7s
+pagie1_gp_parsimony    runs=30 test NRMSE med=0.1411 size med=52 t=94s
+nguyen7_gp_tarpeian    runs=30 test NRMSE med=0.0478 size med=20 t=24s
+pagie1_gp_tarpeian     runs=30 test NRMSE med=0.1774 size med=54 t=68s
+nguyen7_gp_nsga2       runs=30 test NRMSE med=0.0492 size med=8 t=18s
+pagie1_gp_nsga2        runs=30 test NRMSE med=0.3279 size med=10 t=21s

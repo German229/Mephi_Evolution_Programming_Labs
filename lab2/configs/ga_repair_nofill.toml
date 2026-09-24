@@ -1,0 +1,21 @@
+# Абляция ремонта: только удаление нарушителей, без жадного дозаполнения
+tag = "ga_repair_nofill"
+algorithm = "ga"
+instance = "lab2/data/instance.json"
+seed = 2000          # запуск i использует seed + i
+runs = 20
+
+[ga]
+pop_size = 100
+budget = 20000       # критерий остановки: лимит вычислений ФФ
+elite = 2
+tournament_k = 3
+p_init = 0.25        # вероятность единицы при инициализации
+crossover = "uniform"
+p_crossover = 0.9
+mutation = "bitflip"
+p_mutation = 0.025   # bitflip: на ген, = 1/n; swap: на особь
+constraints = "repair"   # "repair" | "penalty"
+repair_fill = false
+penalty_lambda = 0.0
+log_every = 2

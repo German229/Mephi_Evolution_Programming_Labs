@@ -1,0 +1,32 @@
+{
+  "tag": "nsga2_eta5",
+  "algorithm": "nsga2",
+  "weather": "lab3/data/weather.json",
+  "seed": 3000,
+  "runs": 20,
+  "model": {
+    "fc": 100.0,
+    "theta_sat": 130.0,
+    "theta_low": 50.0,
+    "theta0": 60.0,
+    "kc": 1.0,
+    "efficiency": 0.9,
+    "drain": 0.5,
+    "i_max": 25.0
+  },
+  "moea": {
+    "pop_size": 100,
+    "budget": 20000,
+    "p_crossover": 0.9,
+    "eta_c": 15.0,
+    "p_mutation": 0.0,
+    "eta_m": 5.0,
+    "hv_ref": 1.1,
+    "log_every": 2,
+    "ws_h": 3,
+    "ws_pop_size": 40,
+    "elite": 2,
+    "tournament_k": 2
+  },
+  "median_run": 15
+}
